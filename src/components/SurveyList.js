@@ -11,7 +11,7 @@ const SurveyList = () => {
         // Fetch survey data from the backend
         const fetchSurveyData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/surveys');
+                const response = await axios.get('https://mern-survey-backend-h607.onrender.com/api/surveys');
                 setSurveyList(response.data);
             } catch (error) {
                 console.error(error);
@@ -24,7 +24,7 @@ const SurveyList = () => {
         // Add logic to handle admin logout (set adminLoggedIn to false)
         setAdminLoggedIn(false);
 
-        window.location.reload();
+        setSurveyList([]);
 
     };
 

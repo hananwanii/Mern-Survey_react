@@ -1,6 +1,6 @@
 // src/components/SurveyForm.js
 
-// import React, { useState } from 'react';
+ import React, { useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 
@@ -10,8 +10,12 @@ const SurveyForm = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors, isSubmitting, isSubmitSuccessful },
     } = useForm();
+
+    const [formData, setFormData] = useState({});
+    
 
     const onSubmit = async (data) => {
         try {
@@ -21,14 +25,18 @@ const SurveyForm = () => {
             }
 
             // Send survey data to the backend
-            await axios.post('http://localhost:5000/api/submit', data);
+            await axios.post('https://mern-survey-backend-h607.onrender.com/api/submit', data);
             alert('Survey submitted successfully!');
-            window.location.reload();
+            reset();
+            setFormData({});
             
         } catch (error) {
             console.error(error);
             alert('Error submitting survey');
         }
+    };
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     return (
@@ -40,6 +48,7 @@ const SurveyForm = () => {
                     type="text"
                     {...register('name', { required: 'Name is required' })}
                     disabled={isSubmitting}
+                    onChange={handleChange}
                 />
                 {errors.name && <span className="error">{errors.name.message}</span>}
 
@@ -48,6 +57,7 @@ const SurveyForm = () => {
                     id="gender"
                     {...register('gender', { required: 'Please select a gender' })}
                     disabled={isSubmitting}
+                    onChange={handleChange}
                 >
                     <option value="">Select Gender</option>
                     <option value="male">Male</option>
@@ -62,6 +72,7 @@ const SurveyForm = () => {
                     id="nationality"
                     {...register('nationality', { required: 'Nationality is required' })}
                     disabled={isSubmitting}
+                    onChange={handleChange}
                 />
                 {errors.nationality && <span className="error">{errors.nationality.message}</span>}
 
@@ -71,6 +82,7 @@ const SurveyForm = () => {
                     id="email"
                     {...register('email', { required: 'Email is required' })}
                     disabled={isSubmitting}
+                    onChange={handleChange}
                 />
                 {errors.email && <span className="error">{errors.email.message}</span>}
 
@@ -81,6 +93,7 @@ const SurveyForm = () => {
         id="phone"
         {...register('phone', { required: 'Phone is required' })}
                     disabled={isSubmitting}
+                    onChange={handleChange}
                 />
                 {errors.phone && <span className="error">{errors.phone.message}</span>}
 
@@ -91,6 +104,7 @@ const SurveyForm = () => {
         rows="4"
         {...register('address', { required: 'Address is required' })}
                     disabled={isSubmitting}
+                    onChange={handleChange}
                 />
                 {errors.address && <span className="error">{errors.address.message}</span>}
 
@@ -101,6 +115,7 @@ const SurveyForm = () => {
         rows="4"
         {...register('message', { required: 'Message is required' })}
                     disabled={isSubmitting}
+                    onChange={handleChange}
                 />
                 {errors.message && <span className="error">{errors.message.message}</span>}
 
