@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## For access to FrontEnd(React) Part:
 
 # You can use the deployed link for accessing the front end of this code.
-# The Deployed link is : mern-survey-evotech.netlify.app
+# The Deployed link is : https://mern-survey-evotech.netlify.app
 # Using this link you can Submit Surveys Form and Also check the Surveys.
 # But for accessing the survey List you should have admin access.
 # Admin Access is given by logging in to the admin account
